@@ -1,0 +1,11 @@
+FROM ruby AS dev
+
+# Install build deps so dev image can install gems
+RUN apt-get update && apt-get install -y \
+  less
+
+WORKDIR /app
+ENV BUNDLE_PATH=/app/vendor/bundle
+COPY Gemfile Gemfile.lock ./
+RUN gem install bundler
+RUN bundle

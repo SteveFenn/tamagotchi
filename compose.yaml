@@ -1,0 +1,15 @@
+services:
+  rails:
+    build:
+      dockerfile: Dockerfile.dev
+    container_name: tamagotchi
+    command: "bin/rails s -p 4000 -b 0.0.0.0"
+    env_file: .env
+    volumes:
+      - .:/app
+    tmpfs:
+      - /tmp/pids/
+    ports:
+      - 4000:4000
+    tty: true
+    stdin_open: true
