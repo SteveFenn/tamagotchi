@@ -1,0 +1,11 @@
+- create data model for creature
+- create routes for creature
+- create API controller endpoints
+- decide if we want to use operations or not?
+- what testing are we gonna do
+- request specs
+
+
+Future
+- change sqlite3
+- use proper uuid type for create uuid
