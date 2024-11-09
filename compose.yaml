@@ -5,6 +5,9 @@ services:
     container_name: tamagotchi
     command: "bin/rails s -p 4000 -b 0.0.0.0"
     env_file: .env
+    environment: 
+      - PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:./bin
+      - START_WORLD_DAEMON=$START_WORLD_DAEMON
     volumes:
       - .:/app
     tmpfs:
