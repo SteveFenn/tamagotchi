@@ -82,7 +82,8 @@ production:
   primary: &primary_production
     <<: *default
     database: tamagotchi_production
-    username: myapp
+    username: tamagotchi
+    url: DATABASE_URL
     password: <%= ENV["TAMAGOTCHI_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
