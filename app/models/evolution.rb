@@ -15,4 +15,8 @@ class Evolution < ApplicationRecord
     through: :child_transitions, 
     class_name: "Evolution",
     source: :child_evolution
+
+  has_many :creatures, foreign_key: :current_evolution_id
+
+  scope :babies, -> { where.missing(:parents) }
 end
