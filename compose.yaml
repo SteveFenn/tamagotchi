@@ -16,3 +16,16 @@ services:
       - 4000:4000
     tty: true
     stdin_open: true
+  db:
+    image: postgres:17
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "foobarbaz"
+    volumes:
+      - data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  data:
+    name: tamagotchi-data

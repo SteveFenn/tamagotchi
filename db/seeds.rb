@@ -7,3 +7,23 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Temporary destroy_all
+Evolution.destroy_all
+EvolutionTransition.destroy_all
+
+piglet = Evolution.create!(name: "Piglet")
+pig = Evolution.create!(name: "Pig")
+boar = Evolution.create!(name: "Boar")
+mecha_pig = Evolution.create!(name: "Mecha Pig")
+fat_boy = Evolution.create!(name: "Fat Boy")
+roid_boar = Evolution.create!(name: "Roid Boar")
+
+piglet.children << [pig, boar]
+pig.children << [mecha_pig, fat_boy]
+boar.children << [fat_boy, roid_boar]
+
+# piglet -> pi`g ->` mecha pig
+#               -> fatboy
+#           boar -> fatboy
+#                -> roidboar
