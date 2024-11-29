@@ -10,7 +10,10 @@ Rails.application.routes.draw do
 
   namespace "api" do
     namespace "v1" do
-      resources :creatures, only: [:create, :show]
+      resources :creatures, only: [:create, :show] do
+        resources :meals, only: [:create], controller: "creatures/meals"
+        resources :dishes, only: [:index], controller: "creatures/dishes"
+      end
     end
-  end  
+  end
 end

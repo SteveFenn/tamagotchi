@@ -30,6 +30,11 @@ class Creature < ApplicationRecord
     evolve!
   end
 
+  def feed!(dish)
+    return update!(hunger: 0) if dish.decrease_hunger_by > hunger
+    decrement!(:hunger, dish.decrease_hunger_by)
+  end
+
   private
 
   def evolve!

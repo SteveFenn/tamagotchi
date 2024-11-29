@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_15_141107) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_29_141718) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,6 +22,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_15_141107) do
     t.datetime "updated_at", null: false
     t.bigint "current_evolution_id", null: false
     t.datetime "last_evolved_at"
+    t.index ["uuid"], name: "index_creatures_on_uuid", unique: true
+  end
+
+  create_table "dishes", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.integer "decrease_hunger_by", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name", null: false
+    t.index ["uuid"], name: "index_dishes_on_uuid", unique: true
   end
 
   create_table "evolution_transitions", force: :cascade do |t|

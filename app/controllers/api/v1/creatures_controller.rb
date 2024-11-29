@@ -10,7 +10,7 @@ module Api
           # TODO
         end
       end
-      
+
       def show
         creature = Creature.find_by!(params[:uuid])
         render json: { uuid: creature.uuid }
