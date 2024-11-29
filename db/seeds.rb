@@ -11,6 +11,7 @@
 # Temporary destroy_all
 Evolution.destroy_all
 EvolutionTransition.destroy_all
+Creature.destroy_all
 
 piglet = Evolution.create!(name: "Piglet")
 pig = Evolution.create!(name: "Pig")
@@ -23,7 +24,12 @@ piglet.children << [pig, boar]
 pig.children << [mecha_pig, fat_boy]
 boar.children << [fat_boy, roid_boar]
 
-# piglet -> pi`g ->` mecha pig
+pig_creature = Creature.create!(
+  current_evolution: pig,
+  uuid: SecureRandom.uuid
+)
+
+# piglet -> pig -> mecha pig
 #               -> fatboy
 #           boar -> fatboy
 #                -> roidboar

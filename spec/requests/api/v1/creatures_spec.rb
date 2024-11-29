@@ -3,6 +3,7 @@ require "rails_helper"
 describe "Creatures resource" do
   describe "POST /api/v1/creatures" do
     it "creates a new creature and responds with a serialized version" do
+      create(:evolution, :baby, name: "Piglet")
       expect { post api_v1_creatures_path }
       .to change { Creature.count }
       .by(1)
