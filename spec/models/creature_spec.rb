@@ -2,9 +2,44 @@ require 'rails_helper'
 
 RSpec.describe Creature, type: :model do
   describe "#tick" do
-    it "works" do
-      raise("TODO")
+    it "increases loneliness by 1 to a max of 10" do
+      creature = create(:creature, loneliness: 9)
+
+      expect { creature.tick }
+        .to change { creature.reload.loneliness }
+        .from(9)
+        .to(10)
+
+      expect { creature.tick }
+        .to_not change { creature.reload.loneliness }
     end
+
+    it "increases filthiness by 1 to a max of 10" do
+      creature = create(:creature, filthiness: 9)
+
+      expect { creature.tick }
+        .to change { creature.filthiness }
+        .from(9)
+        .to(10)
+
+      expect { creature.tick }
+        .to_not change { creature.reload.filthiness }
+    end
+
+    it "increases hunger by 1 to a max of 10" do
+      creature = create(:creature, hunger: 9)
+
+      expect { creature.tick }
+        .to change { creature.hunger }
+        .from(9)
+        .to(10)
+
+      expect { creature.tick }
+        .to_not change { creature.reload.hunger }
+    end
+
+    it "might evolve them TODO"
+    it "might kill them if they are really fucked TODO"
   end
 
   describe "#feed" do

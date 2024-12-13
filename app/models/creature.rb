@@ -10,9 +10,16 @@ class Creature < ApplicationRecord
   belongs_to :current_evolution, class_name: "Evolution"
 
   def tick
+    # loneliness
+    # do stuff
+
+    # filthines
+    # do stuff
+
     # hunger
     increment!(:hunger)
     if hunger == 10
+      # TODO: update
       die!
     end
 
