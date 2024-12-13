@@ -1,11 +1,10 @@
 module Api
   module V1
     module Creatures
-      class MealsController < ApplicationController
+      class PlayTimesController < ApplicationController
         def create
           creature = Creature.find_by!(uuid: params[:creature_id])
-          dish = Dish.find_by!(uuid: params[:dish_id])
-          creature.feed(dish)
+          creature.play
         end
       end
     end

@@ -12,9 +12,7 @@ describe "Creature PlayTime resources" do
     end
 
     it "explodes if the creature doesn't exist" do
-      dish = create(:dish)
-
-      post api_v1_creature_play_times_path("non-existing-creature-id", dish_id: dish.uuid)
+      post api_v1_creature_play_times_path("non-existing-creature-id")
       expect(response).to be_not_found
     end
   end

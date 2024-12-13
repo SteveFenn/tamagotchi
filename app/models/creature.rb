@@ -25,14 +25,14 @@ class Creature < ApplicationRecord
     end
   end
 
-  def evolve_or_die!
-    return die! if current_evolution.children.none?
-    evolve!
-  end
-
-  def feed!(dish)
+  def feed(dish)
     return update!(hunger: 0) if dish.decrease_hunger_by > hunger
     decrement!(:hunger, dish.decrease_hunger_by)
+  end
+
+  def play
+    return if loneliness == 0
+    decrement!(:loneliness)
   end
 
   private
@@ -50,5 +50,10 @@ class Creature < ApplicationRecord
 
   def evolution_comparison_timestamp
     last_evolved_at || created_at
+  end
+
+  def evolve_or_die!
+    return die! if current_evolution.children.none?
+    evolve!
   end
 end
