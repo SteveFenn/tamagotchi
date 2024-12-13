@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_13_121237) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_13_123417) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,6 +23,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_13_121237) do
     t.bigint "current_evolution_id", null: false
     t.datetime "last_evolved_at"
     t.integer "loneliness", default: 0, null: false
+    t.integer "filthiness", default: 0, null: false
     t.index ["uuid"], name: "index_creatures_on_uuid", unique: true
   end
 

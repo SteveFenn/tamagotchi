@@ -7,7 +7,7 @@ describe "Creatures resource" do
       expect { post api_v1_creatures_path }
       .to change { Creature.count }
       .by(1)
-      expect(response).to be_successful
+      expect(response).to have_http_status(:success)
       parsed_response = JSON.parse(response.body)
       expect(parsed_response["uuid"]).to_not be_blank
     end

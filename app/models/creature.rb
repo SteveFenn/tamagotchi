@@ -17,9 +17,9 @@ class Creature < ApplicationRecord
     end
 
     # evolve
-    evolution_threshold = evolution_comparison_timestamp + 
+    evolution_threshold = evolution_comparison_timestamp +
       current_evolution.life_span_in_minutes.minutes
-    
+
     if Time.now > evolution_threshold
       evolve_or_die!
     end
@@ -33,6 +33,11 @@ class Creature < ApplicationRecord
   def play
     return if loneliness == 0
     decrement!(:loneliness)
+  end
+
+  def clean_up
+    return if filthiness == 0
+    decrement!(:filthiness)
   end
 
   private

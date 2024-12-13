@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         resources :meals, only: [:create], controller: "creatures/meals"
         resources :dishes, only: [:index], controller: "creatures/dishes"
         resources :play_times, only: [:create], controller: "creatures/play_times"
+        resources :clean_ups, only: [:create], controller: "creatures/clean_ups"
       end
     end
   end

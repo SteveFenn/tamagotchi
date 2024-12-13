@@ -48,4 +48,20 @@ RSpec.describe Creature, type: :model do
         .to_not change { creature.hunger }
     end
   end
+
+  describe "#clean_up" do
+    it "decrements the filthiness by one" do
+      creature = create(:creature, filthiness: 10)
+
+      expect { creature.clean_up }
+        .to change { creature.filthiness }.from(10).to(9)
+    end
+
+    it "cannot reduce filthiness below 0" do
+      creature = create(:creature, filthiness: 0)
+
+      expect { creature.clean_up }
+        .to_not change { creature.hunger }
+    end
+  end
 end

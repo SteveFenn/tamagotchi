@@ -7,7 +7,7 @@ describe "Creature Meals resource" do
       dish = create(:dish, decrease_hunger_by: 5)
 
       post api_v1_creature_meals_path(creature.uuid, dish_id: dish.uuid)
-      expect(response).to be_successful
+      expect(response).to have_http_status(:success)
 
       expect(creature.reload.hunger).to eq(5)
     end
@@ -16,14 +16,14 @@ describe "Creature Meals resource" do
       creature = create(:creature)
 
       post api_v1_creature_meals_path(creature.uuid, dish_id: "non-existing-dish-id")
-      expect(response).to be_not_found
+      expect(response).to have_http_status(:not_found)
     end
 
     it "explodes if the creature doesn't exist" do
       dish = create(:dish)
 
       post api_v1_creature_meals_path("non-existing-creature-id", dish_id: dish.uuid)
-      expect(response).to be_not_found
+      expect(response).to have_http_status(:not_found)
     end
   end
 end
