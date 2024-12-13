@@ -12,8 +12,15 @@ module Api
       end
 
       def show
-        creature = Creature.find_by!(params[:uuid])
-        render json: { uuid: creature.uuid }
+        creature = Creature.find_by!(uuid: params[:uuid])
+        render json: {
+          uuid: creature.uuid,
+          hunger: creature.hunger,
+          filthiness: creature.filthiness,
+          loneliness: creature.loneliness,
+          health: creature.health,
+          image: request.base_url + "/images/tamagotchi.gif"
+        }
       end
     end
   end
