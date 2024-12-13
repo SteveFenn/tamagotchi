@@ -12,7 +12,7 @@ module Api
       end
 
       def show
-        creature = Creature.find_by!(uuid: params[:uuid])
+        creature = Creature.find_by!(uuid: params[:id])
         render json: {
           uuid: creature.uuid,
           hunger: creature.hunger,

@@ -12,6 +12,17 @@ describe "Creature Meals resource" do
       expect(creature.reload.hunger).to eq(5)
     end
 
+    it "returns JSON with an image of the meal" do
+      creature = create(:creature)
+      dish = create(:dish, decrease_hunger_by: 5)
+
+      post api_v1_creature_meals_path(creature.uuid, dish_id: dish.uuid)
+      
+      expect(parsed_response).to include({
+        image: be_a(String)
+      })
+    end
+
     it "explodes if the dish doesn't exist" do
       creature = create(:creature)
 

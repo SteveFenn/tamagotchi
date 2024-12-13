@@ -4,12 +4,12 @@ describe "Creatures resource" do
   describe "POST /api/v1/creatures" do
     it "creates a new creature and responds with a serialized version" do
       create(:evolution, :baby, name: "Piglet")
+
       expect { post api_v1_creatures_path }
       .to change { Creature.count }
       .by(1)
       expect(response).to have_http_status(:success)
-      parsed_response = JSON.parse(response.body)
-      expect(parsed_response["uuid"]).to_not be_blank
+      expect(parsed_response[:uuid]).to_not be_blank
     end
   end
   
@@ -17,9 +17,16 @@ describe "Creatures resource" do
     it "finds a creature based on UUID and responds with a serialized version" do
       creature = create(:creature)
       get api_v1_creature_path(creature.uuid)
-      expect(response).to be_successful
-      parsed_response = JSON.parse(response.body)
-      expect(parsed_response["uuid"]).to_not be_blank
+
+      expect(response).to have_http_status(:success)
+      expect(parsed_response).to include({
+        uuid: creature.uuid,
+        hunger: creature.hunger,
+        loneliness: creature.loneliness,
+        filthiness: creature.filthiness,
+        health: creature.health,
+        image: be_a(String)
+      })
     end
   end
 end

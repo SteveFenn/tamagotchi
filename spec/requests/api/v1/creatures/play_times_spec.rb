@@ -15,5 +15,15 @@ describe "Creature PlayTime resources" do
       post api_v1_creature_play_times_path("non-existing-creature-id")
       expect(response).to have_http_status(:not_found)
     end
+
+    it "returns JSON with an image of the play time" do
+      creature = create(:creature)
+
+      post api_v1_creature_play_times_path(creature.uuid)
+
+      expect(parsed_response).to include({
+        image: be_a(String)
+      })
+    end
   end
 end
