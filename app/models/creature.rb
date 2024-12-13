@@ -10,18 +10,9 @@ class Creature < ApplicationRecord
   belongs_to :current_evolution, class_name: "Evolution"
 
   def tick
-    # loneliness
-    # do stuff
-
-    # filthines
-    # do stuff
-
-    # hunger
-    increment!(:hunger)
-    if hunger == 10
-      # TODO: update
-      die!
-    end
+    increment!(:loneliness) unless loneliness == 10
+    increment!(:filthiness) unless filthiness == 10
+    increment!(:hunger) unless hunger == 10
 
     # evolve
     evolution_threshold = evolution_comparison_timestamp +
