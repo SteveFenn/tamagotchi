@@ -9,10 +9,19 @@ class Creature < ApplicationRecord
 
   belongs_to :current_evolution, class_name: "Evolution"
 
-  def tick
+  def tick(dice_roller: DiceRoller.new)
     increment!(:loneliness) unless loneliness == 10
     increment!(:filthiness) unless filthiness == 10
     increment!(:hunger) unless hunger == 10
+
+    if in_danger_zone?
+      dice_roller.roll(d: 6, succeed_on: 4) do
+        decrement!(:health)
+        if health == 0
+          die!
+        end
+      end
+    end
 
     # evolve
     evolution_threshold = evolution_comparison_timestamp +
@@ -39,6 +48,11 @@ class Creature < ApplicationRecord
   end
 
   private
+
+  def in_danger_zone?
+    attrs = [hunger, loneliness, filthiness]
+    (attrs.sum / attrs.size.to_f) > 8
+  end
 
   def evolve!
     update!(

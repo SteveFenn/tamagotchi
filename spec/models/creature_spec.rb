@@ -42,7 +42,7 @@ RSpec.describe Creature, type: :model do
 
     it "has the chance to decrease health by 1 if stats are in danger zone" do
       creature = create(:creature, :in_danger_zone, health: 5)
-      always_bad_rolls_dice_roller = DiceRoller.new(always_invokes: true)
+      always_bad_rolls_dice_roller = DiceRoller.new(always_invoke: true)
 
       expect { creature.tick(dice_roller: always_bad_rolls_dice_roller) }
         .to change { creature.health }
@@ -52,7 +52,7 @@ RSpec.describe Creature, type: :model do
 
     it "kills the tamagotchi if your health is reduced to 0" do
       creature = create(:creature, :in_danger_zone, health: 1)
-      always_bad_rolls_dice_roller = DiceRoller.new(always_invokes: true)
+      always_bad_rolls_dice_roller = DiceRoller.new(always_invoke: true)
 
       expect { creature.tick(dice_roller: always_bad_rolls_dice_roller) }
         .to change { creature.health }
